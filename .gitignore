@@ -30,3 +30,17 @@ kubectl*   # Covers other variants if any
 # IDE files (optional, if you use VS Code or similar)
 .vscode/
 .idea/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+
+# Generated reports and test results (if they are auto-generated)
+go_service_report.html
+go_service_test_exceptions.csv
+go_service_test_failures.csv
+go_service_test_stats.csv
+go_service_test_stats_history.csv
+
+# Kubernetes folder if only binaries (adjust if configs are needed)
+kubernetes/
