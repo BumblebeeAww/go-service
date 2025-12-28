@@ -1,0 +1,32 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (uncomment if you use vendoring)
+# vendor/
+
+# Go workspace file
+go.work
+
+# Large binaries (specific to Kubernetes tools)
+kubectl
+minikube-linux-amd64
+minikube*  # Covers other variants like minikube-darwin-amd64, etc.
+kubectl*   # Covers other variants if any
+
+# Temporary files
+*.tmp
+*.log
+
+# IDE files (optional, if you use VS Code or similar)
+.vscode/
+.idea/

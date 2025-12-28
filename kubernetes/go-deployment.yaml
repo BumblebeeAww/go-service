@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-service-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: go-service
+  template:
+    metadata:
+      labels:
+        app: go-service      
+    spec:
+      containers:
+      - name: go-service
+        image: go-service:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:          
+          - name: REDIS_ADDR            
+            value: "redis-master.default.svc.cluster.local:6379"
+          - name: REDIS_PASSWORD            
+            valueFrom:
+              secretKeyRef:
+                name: redis 
+                key: redis-password
+          - name: PORT
+            value: "8080"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-service
+  namespace: default
+spec:
+  selector:
+    app: go-service
+  ports:
+  - name: metrics  
+    port: 8080     
+    targetPort: 8080  
+    protocol: TCP
+  type: ClusterIP
